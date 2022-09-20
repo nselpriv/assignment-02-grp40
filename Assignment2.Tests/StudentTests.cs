@@ -8,9 +8,9 @@ public class StudentTests
        //Arrange
        var student = new Student.Model.Student(
          1,
-         new DateTime(01/12),
-         new DateTime(02/12),
-         new DateTime(03/12)
+         new DateTime(2015,3,1),
+         new DateTime(2016,3,1),
+         new DateTime(2020,4,1)
          );
          student.Surname = "johnson";
 
