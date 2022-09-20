@@ -5,6 +5,6 @@ public class DelegatesTests
     [Fact]
     public void Test1()
     {
-
+    
     }
 }
