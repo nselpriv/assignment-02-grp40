@@ -11,43 +11,42 @@ public class Student
     public DateTime EndDate{get; set;}
     public DateTime GraduationDate{get; set;}
 
-    public Status setStatus()
-    {
-    //students graduationtime is the same as their endtime ie. they are graduated
-    if(this.GraduationDate.CompareTo(this.EndDate) == 0 && this.GraduationDate.Year.CompareTo(DateTime.Now.Year) < 0)
-    {
-        this.Status=Status.Graduated;
-        return Status.Graduated;
+    public Student(int Id, DateTime StartDate, DateTime EndDate, DateTime GraduationDate){
+        this.Id = Id;
+        this.EndDate = EndDate;
+        this.StartDate = StartDate;
+        this.GraduationDate = GraduationDate;
+        if(EndDate < GraduationDate)
+        {
+        this.Status = Status.Dropout;
+        return;
+        }
+        if(DateTime.Now < EndDate && DateTime.Now < GraduationDate)
+        {
+        this.Status = Status.Active;
+        if(DateTime.Now.Year == StartDate.Year)
+        {
+        this.Status = Status.New;
+        return;
+        }
+        return; 
+        }
+        if(DateTime.Now > GraduationDate && GraduationDate == EndDate)
+        {
+        this.Status = Status.Graduated;
+        return;
+        }
+        throw new ArgumentException("status has not been set incorrect values in dates");
     }
-        //students graduationtime is later than their endtime ie. they are dropouts
-    if(this.GraduationDate.CompareTo(this.EndDate) == -1)
-    {
-        this.Status=Status.Dropout;
-        return Status.Dropout;
-    }
-    //students starting year is this year ie. they are new 
-    if(this.StartDate.Year.CompareTo(DateTime.Now.Year) == 0)
-    {
-        this.Status=Status.New;
-        return Status.New;
-    }
-    //students who have not yet graduated but are still active
-    if(this.GraduationDate.Year.CompareTo(DateTime.Now.Year) == -1)
-    {
-        this.Status=Status.Active;
-        return Status.Active;
-    }
-    throw new ArgumentException("status may have not been initialized proper in student");
-    }
-    
+
     public override String ToString()
     {
-    return ("Student number " + Id + "\n"
-     + "Name: " + GivenName + " " + Surname + "\n"
-     + "Status: " + Status + "\n"
-     + "Enrolled: " + StartDate + "\n"
-     + "End: " + EndDate + "\n"
-     + "Graduation: " + GraduationDate + "\n"
+    return ("Student number " + this.Id + "\n"
+     + "Name: " + this.GivenName + " " + this.Surname + "\n"
+     + "Status: " + this.Status + "\n"
+     + "Enrolled: " + this.StartDate + "\n"
+     + "End: " + this.EndDate + "\n"
+     + "Graduation: " + this.GraduationDate + "\n"
      );
     }
     }

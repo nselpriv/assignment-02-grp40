@@ -6,96 +6,92 @@ public class StudentTests
     public void check_for_student()
     {
        //Arrange
-       var student = new Student.Model.Student{
-        Id = 01,
-        GivenName = "John",
-        Surname = "Johnson",
-        StartDate = new DateTime(01/12),
-        EndDate = new DateTime(02/12),
-        GraduationDate = new DateTime(03/12)
-          };
+       var student = new Student.Model.Student(
+         1,
+         new DateTime(01/12),
+         new DateTime(02/12),
+         new DateTime(03/12)
+         );
+         student.Surname = "johnson";
 
        //Act
-       var result = student.Surname = "Not johnson anymore" ;
+       var result = student.Surname;
 
        //Assert
-
-        result.Equals("not johnson anymore");
-
+        result.Should().Be("johnson");
     }
-    [Fact]
-    public void check_for_correctgraduation_new()
+
+
+     [Fact]
+    public void check_for_dropout()
     {
        //Arrange
-       var student = new Student.Model.Student{
-        Id = 01,
-        GivenName = "John",
-        Surname = "Johnson",
-        StartDate = new DateTime(01/01/2022),
-        EndDate = new DateTime(02/12/2022),
-        GraduationDate = new DateTime(03/12/2022)
-          };
+       var student = new Student.Model.Student(
+         1,
+         new DateTime(2015,3,1),
+         new DateTime(2016,3,1),
+         new DateTime(2020,4,1)
+         );
 
        //Act
-       student.setStatus();
+       var result = student.Status;
+
        //Assert
-        student.Status.Equals(Student.Model.Status.New);
+        result.Should().Be(Student.Model.Status.Dropout);
     }
-    [Fact]
-    public void check_for_correctgraduation_dropout()
+
+     [Fact]
+    public void check_for_active()
     {
        //Arrange
-       var student = new Student.Model.Student{
-        Id = 01,
-        GivenName = "John",
-        Surname = "Johnson",
-        StartDate = new DateTime(01/01/2022),
-        EndDate = new DateTime(01/01/2023),
-        GraduationDate = new DateTime(01/01/2025)
-          };
+       var student = new Student.Model.Student(
+         1,
+         new DateTime(2015,3,1),
+         new DateTime(2120,4,1),
+         new DateTime(2120,4,1)
+         );
 
        //Act
-       student.setStatus();
+       var result = student.Status;
+
        //Assert
-        student.Status.Equals(Student.Model.Status.Dropout);
+        result.Should().Be(Student.Model.Status.Active);
     }
-    [Fact]
-    public void check_for_correctgraduation_graduted()
+
+     [Fact]
+    public void check_for_new()
     {
        //Arrange
-       var student = new Student.Model.Student{
-        Id = 01,
-        GivenName = "John",
-        Surname = "Johnson",
-        StartDate = new DateTime(1/1/2001),
-        EndDate = new DateTime(1/1/2004),
-        GraduationDate = new DateTime(01/01/2004)
-          };
+       var student = new Student.Model.Student(
+         1,
+         new DateTime(2022,3,1),
+         new DateTime(2120,4,1),
+         new DateTime(2120,4,1)
+         );
 
        //Act
-       student.setStatus();
+       var result = student.Status;
+
        //Assert
-        student.Status.Equals(Student.Model.Status.Graduated);
+        result.Should().Be(Student.Model.Status.New);
     }
-    [Fact]
-    public void check_for_correctgraduation_active()
+
+     [Fact]
+    public void check_for_Graduated()
     {
        //Arrange
-       var student = new Student.Model.Student{
-        Id = 01,
-        GivenName = "John",
-        Surname = "Johnson",
-        StartDate = new DateTime(1/1/2001),
-        EndDate = new DateTime(1/1/2025),
-        GraduationDate = new DateTime(01/01/2025)
-          };
-
-          Console.WriteLine(student.ToString());
+       var student = new Student.Model.Student(
+         1,
+         new DateTime(2001,3,1),
+         new DateTime(2003,4,1),
+         new DateTime(2003,4,1)
+         );
 
        //Act
-       student.setStatus();
+       var result = student.Status;
+
        //Assert
-        student.Status.Equals(Student.Model.Status.Active);
+        result.Should().Be(Student.Model.Status.Graduated);
     }
     
 }
