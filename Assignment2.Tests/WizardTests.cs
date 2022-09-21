@@ -19,5 +19,7 @@ public class WizardTests
 
         Assert.Contains(wizards, w => w == new Wizard(name, medium, year, creator));
     }
+
+    
 }
 
