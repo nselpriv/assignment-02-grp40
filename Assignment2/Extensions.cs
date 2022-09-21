@@ -4,7 +4,7 @@ namespace Assignment2;
 
 public static class Extensions
 {
-     public static Boolean IsSecure(this Uri uri) => uri.Scheme.Equals("https") ? true : false; 
+     public static Boolean IsSecure(this Uri uri) => uri.Scheme.Equals("https"); 
 
      public static int WordCount(this String str){   
         int i = 0; 

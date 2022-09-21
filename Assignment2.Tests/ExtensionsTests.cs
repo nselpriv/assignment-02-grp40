@@ -2,30 +2,19 @@ namespace Assignment2.Tests;
 
 public class ExtensionsTests
 {
-    [Fact]
-    public void Test_uri_is_safe()
+    [Theory]
+    [InlineData("http://www.erdetfredag.dk/", false)]
+    [InlineData("https://www.erdetfredag.dk/", true)]
+    public void Test_uri_is_safe(string word, bool expected)
     {
          //Arrange
-         Uri uri = new Uri("https://www.erdetfredag.dk/");
+         Uri uri = new Uri(word);
 
         //Act
         var result = Extensions.IsSecure(uri);
 
        //Assert
-        result.Should().Be(true);
-    }
-
-    [Fact]
-    public void Test_uri_is_not_safe()
-    {
-         //Arrange
-         Uri uri = new Uri("http://www.erdetfredag.dk/");
-
-        //Act
-        var result = Extensions.IsSecure(uri);
-
-       //Assert
-        result.Should().Be(false);
+        result.Should().Be(expected);
     }
 
     [Fact]
